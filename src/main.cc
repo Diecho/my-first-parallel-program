@@ -144,8 +144,9 @@ int main(int argc, char* argv[]) {
 	int trio_count = 0;
 
 	int limit = students.size();
-	if(limit > 3000) limit = 3000;
+	if(limit > 4000) limit = 4000;
 
+	cout << "Range 0 - " << limit << endl;
 	cout << "Searching for trios of dropouts with identical GPAs (First " << limit << " students)...\n";
 
 	//start = sc::now();
@@ -162,11 +163,33 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
+	
+	cout << "Total Identical Dropout Trios found: " << trio_count << "\n";
+
+	int newLimit = students.size();
+	if(newLimit > 8000) newLimit = 8000;
+
+	cout << "Range " << limit << " - " << newLimit << endl;
+	cout << "Searching for trios of dropouts with identical GPAs (First " << limit << " students)...\n";
+
+	for (int i = limit; i < newLimit; ++i) {
+		for (int j = i + 1; j < newLimit; ++j) {
+			for (int k = j + 1; k < newLimit; ++k) {
+
+				if (students[i].dropout == 1 && students[j].dropout == 1 && students[k].dropout == 1) {
+
+					if (students[i].gpa == students[j].gpa && students[j].gpa == students[k].gpa) {
+						trio_count++;
+					}
+				}
+			}
+		}
+	}
 	//end = sc::now();
 	//total_time += (end - start);
 	//cout << "loop_time " << (duration<double>(total_time)).count() << endl;
 
-cout << "Total Identical Dropout Trios found: " << trio_count << "\n";
+	cout << "Total Identical Dropout Trios found: " << trio_count << "\n";
 
 	return 0;
 }
