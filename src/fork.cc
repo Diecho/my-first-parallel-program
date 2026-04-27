@@ -7,211 +7,210 @@ using namespace std;
 
 
 void firstLoop(vector<Student>& students){
-        int n_of_drop = 0;
-        int total_students = 0;
-        int non_drop_students = 0;
+	int n_of_drop = 0;
+	int total_students = 0;
+	int non_drop_students = 0;
 
-        int count_f = 0;
-        int count_m = 0;
+	int count_f = 0;
+	int count_m = 0;
 
-        double total_stress_drop = 0;
-        double total_stress_all = 0;
-        double total_stress_non = 0;
+	double total_stress_drop = 0;
+	double total_stress_all = 0;
+	double total_stress_non = 0;
 
-        double total_gpa_drop = 0;
-        double total_gpa_all = 0;
-        double total_gpa_non = 0;
-        //sc::duration total_time = sc::duration::zero();
-        //auto start = sc::now();
-        for(Student& st: students){
-                total_students++;
-                total_stress_all+=st.stress_index;
-                total_gpa_all+=st.gpa;
-                if(st.dropout == 1){
-                        ++n_of_drop;
-                        total_stress_drop+=st.stress_index;
-                        total_gpa_drop+=st.gpa;
+	double total_gpa_drop = 0;
+	double total_gpa_all = 0;
+	double total_gpa_non = 0;
+	//sc::duration total_time = sc::duration::zero();
+	//auto start = sc::now();
+	for(Student& st: students){
+		total_students++;
+		total_stress_all+=st.stress_index;
+		total_gpa_all+=st.gpa;
+		if(st.dropout == 1){
+			++n_of_drop;
+			total_stress_drop+=st.stress_index;
+			total_gpa_drop+=st.gpa;
 
-                        if(st.gender == "Male"){
-                                ++count_m;
-                        }else {
-                                ++count_f;
-                        }
+			if(st.gender == "Male"){
+				++count_m;
+			}else {
+				++count_f;
+			}
 
-                }
-                else {
-                        total_stress_non+=st.stress_index;
-                        total_gpa_non+=st.gpa;
-                        non_drop_students++;
-                }
-        }
-        //auto end = sc::now();
-        //total_time += (end - start);
-        cout << "--- Data ---\n";
+		}
+		else {
+			total_stress_non+=st.stress_index;
+			total_gpa_non+=st.gpa;
+			non_drop_students++;
+		}
+	}
+	//auto end = sc::now();
+	//total_time += (end - start);
+	cout << "--- Data ---\n";
 
-        cout << "Total Number of student: " << total_students << "\n";
-        cout << "Total Number of student dropouts: " << n_of_drop << "\n";
+	cout << "Total Number of student: " << total_students << "\n";
+	cout << "Total Number of student dropouts: " << n_of_drop << "\n";
 
-        cout << "Dropouts %: " << (static_cast<float>(n_of_drop) / total_students) * 100 << "\n";
+	cout << "Dropouts %: " << (static_cast<float>(n_of_drop) / total_students) * 100 << "\n";
 
-        cout << "------------------------------------------\n";
+	cout << "------------------------------------------\n";
 
-        cout << "Male dropout n: " << count_m << "\n";
-        cout << "Female dropout n: " << count_f << "\n";
-        if(n_of_drop < 1){
-                cout << "Male dropout %: " << 0 << "\n";
-                cout << "Female dropout %: " << 0 << "\n";
-        }else {
-                cout << "Male dropout %: " << (static_cast<float>(count_m) / n_of_drop) * 100 << "\n";
-                cout << "Female dropout %: " << (static_cast<float>(count_f) / n_of_drop) * 100 << "\n";
-        }
+	cout << "Male dropout n: " << count_m << "\n";
+	cout << "Female dropout n: " << count_f << "\n";
+	if(n_of_drop < 1){
+		cout << "Male dropout %: " << 0 << "\n";
+		cout << "Female dropout %: " << 0 << "\n";
+	}else {
+		cout << "Male dropout %: " << (static_cast<float>(count_m) / n_of_drop) * 100 << "\n";
+		cout << "Female dropout %: " << (static_cast<float>(count_f) / n_of_drop) * 100 << "\n";
+	}
 
-        cout << "------------------------------------------\n";
+	cout << "------------------------------------------\n";
 
-        cout << "Avg stress_index for a all student: " << total_stress_all / total_students << "\n";
-        cout << "Avg stress_index for a non-dropout student: " << total_stress_non / non_drop_students<< "\n";
-        if(n_of_drop < 1){
-                cout << "Avg stress_index for a dropout student: None\n";
-        }else {
-                cout << "Avg stress_index for a dropout student: " << total_stress_drop / n_of_drop << "\n";
-        }
+	cout << "Avg stress_index for a all student: " << total_stress_all / total_students << "\n";
+	cout << "Avg stress_index for a non-dropout student: " << total_stress_non / non_drop_students<< "\n";
+	if(n_of_drop < 1){
+		cout << "Avg stress_index for a dropout student: None\n";
+	}else {
+		cout << "Avg stress_index for a dropout student: " << total_stress_drop / n_of_drop << "\n";
+	}
 
 
-        cout << "------------------------------------------\n";
+	cout << "------------------------------------------\n";
 
-        cout << "Avg GPA for a all student: " << total_gpa_all / total_students << "\n";
-        cout << "Avg GPA for a non-dropout student: " << total_gpa_non / non_drop_students<< "\n";
+	cout << "Avg GPA for a all student: " << total_gpa_all / total_students << "\n";
+	cout << "Avg GPA for a non-dropout student: " << total_gpa_non / non_drop_students<< "\n";
 
-        if(n_of_drop < 1){
-                cout << "Avg GPA for a dropout student: None \n";
-        }else {
-                cout << "Avg GPA for a dropout student: " << total_gpa_drop / n_of_drop << "\n";
-        }
+	if(n_of_drop < 1){
+		cout << "Avg GPA for a dropout student: None \n";
+	}else {
+		cout << "Avg GPA for a dropout student: " << total_gpa_drop / n_of_drop << "\n";
+	}
 
-        cout << "------------------------------------------\n";
+	cout << "------------------------------------------\n";
 
-        cout << "Finding high-risk pairs (Similar profiles, different outcomes)...\n";
+	cout << "Finding high-risk pairs (Similar profiles, different outcomes)...\n";
 }
 void secondLoop(vector<Student>& students){
-        double similarity_threshold = 0.15;
-        int high_risk_pairs = 0;
-        //start = sc::now();
+	double similarity_threshold = 0.15;
+	int high_risk_pairs = 0;
+	//start = sc::now();
 
-        for (size_t i = 0; i < students.size(); ++i) {
-                for (size_t j = i + 1; j < students.size(); ++j) {
+	for (size_t i = 0; i < students.size(); ++i) {
+		for (size_t j = i + 1; j < students.size(); ++j) {
 
-                        if (students[i].dropout != students[j].dropout) {
+			if (students[i].dropout != students[j].dropout) {
 
-                                double gpa_diff = students[i].gpa - students[j].gpa;
-                                double stress_diff = students[i].stress_index - students[j].stress_index;
-                                double distance = (gpa_diff * gpa_diff + stress_diff * stress_diff);
+				double gpa_diff = students[i].gpa - students[j].gpa;
+				double stress_diff = students[i].stress_index - students[j].stress_index;
+				double distance = (gpa_diff * gpa_diff + stress_diff * stress_diff);
 
-                                if (distance < similarity_threshold) {
-                                        high_risk_pairs++;
-                                }
-                        }
-                }
-        }
+				if (distance < similarity_threshold) {
+					high_risk_pairs++;
+				}
+			}
+		}
+	}
 
-        //end = sc::now();
-        //total_time += (end - start);
-        cout << "Total High-Risk Similar Pairs found: " << high_risk_pairs << "\n";
+	//end = sc::now();
+	//total_time += (end - start);
+	cout << "Total High-Risk Similar Pairs found: " << high_risk_pairs << "\n";
 
-        cout << "------------------------------------------\n";
+	cout << "------------------------------------------\n";
 }
 void third2Loop(vector<Student>& students, int limit, int newLimit){
-        int trio_count = 0;
+	int trio_count = 0;
 
-        cout << "Range " << limit << " - " << newLimit << endl;
-        cout << "Searching for trios of dropouts with identical GPAs (First " << limit << " students)...\n";
+	for (int i = limit; i < newLimit; ++i) {
+		for (int j = i + 1; j < newLimit; ++j) {
+			for (int k = j + 1; k < newLimit; ++k) {
 
-        for (int i = limit; i < newLimit; ++i) {
-                for (int j = i + 1; j < newLimit; ++j) {
-                        for (int k = j + 1; k < newLimit; ++k) {
+				if (students[i].dropout == 1 && students[j].dropout == 1 && students[k].dropout == 1) {
 
-                                if (students[i].dropout == 1 && students[j].dropout == 1 && students[k].dropout == 1) {
+					if (students[i].gpa == students[j].gpa && students[j].gpa == students[k].gpa) {
+						trio_count++;
+					}
+				}
+			}
+		}
+	}
+	//end = sc::now();
+	//total_time += (end - start);
+	//cout << "loop_time " << (duration<double>(total_time)).count() << endl;
 
-                                        if (students[i].gpa == students[j].gpa && students[j].gpa == students[k].gpa) {
-                                                trio_count++;
-                                        }
-                                }
-                        }
-                }
-        }
-        //end = sc::now();
-        //total_time += (end - start);
-        //cout << "loop_time " << (duration<double>(total_time)).count() << endl;
-
-        cout << "Total Identical Dropout Trios found: " << trio_count << "\n";
+	cout << "Range " << limit << " - " << newLimit << endl;
+	cout << "Searching for trios of dropouts with identical GPAs (First " << limit << " students)...\n";
+	cout << "Total Identical Dropout Trios found: " << trio_count << "\n";
 }
 int main(int argc, char* argv[]) {
-        string filename = "";
+	string filename = "";
 
-        if(argc > 1) {
-                filename = argv[1];
-        }
-        else filename = "data/student_dropout_dataset_v3.csv";
+	if(argc > 1) {
+		filename = argv[1];
+	}
+	else filename = "data/student_dropout_dataset_v3.csv";
 
-        cout << "Loading data from: " << filename << "...\n";
+	cout << "Loading data from: " << filename << "...\n";
 
-        vector<Student> students = read_cvs(filename);
+	vector<Student> students = read_cvs(filename);
 
-        if (students.empty()) {
-                cout << "Failed.\n";
-                return 1;
-        }
+	if (students.empty()) {
+		cout << "Failed.\n";
+		return 1;
+	}
 
-        cout << "Successfully loaded " << students.size() << " valid students!\n\n";
-
-
-        int limit = 4000;
-        int newLimit = students.size();
-        if(newLimit > 8000) newLimit = 8000;
-
-        pid_t pid1 = fork();
-        if (pid1 == 0) {
-                firstLoop(students);
-                return 0;
-        }
-
-        pid_t pid2 = fork();
-        if (pid2 == 0) {
-                secondLoop(students);
-                return 0;
-        }
-
-        pid_t pid3 = fork();
-        if (pid3 == 0) {
-                third2Loop(students, 0, 2000);
-                return 0;
-        }
-
-        pid_t pid4 = fork();
-        if (pid4 == 0) {
-                third2Loop(students, 2000, 4000);
-                return 0;
-        }
-
-        pid_t pid5 = fork();
-        if (pid5 == 0) {
-                third2Loop(students, 4000, 6000);
-                return 0;
-        }
-
-        pid_t pid6 = fork();
-        if (pid6 == 0) {
-                third2Loop(students, 6000, 8000);
-                return 0;
-        }
+	cout << "Successfully loaded " << students.size() << " valid students!\n\n";
 
 
-        waitpid(pid1, NULL, 0);
-        waitpid(pid2, NULL, 0);
-        waitpid(pid3, NULL, 0);
-        waitpid(pid4, NULL, 0);
-        waitpid(pid5, NULL, 0);
-        waitpid(pid6, NULL, 0);
+	int limit = 4000;
+	int newLimit = students.size();
+	if(newLimit > 8000) newLimit = 8000;
+
+	pid_t pid1 = fork();
+	if (pid1 == 0) {
+		firstLoop(students);
+		return 0;
+	}
+
+	pid_t pid2 = fork();
+	if (pid2 == 0) {
+		secondLoop(students);
+		return 0;
+	}
+
+	pid_t pid3 = fork();
+	if (pid3 == 0) {
+		third2Loop(students, 0, 2000);
+		return 0;
+	}
+
+	pid_t pid4 = fork();
+	if (pid4 == 0) {
+		third2Loop(students, 2000, 4000);
+		return 0;
+	}
+
+	pid_t pid5 = fork();
+	if (pid5 == 0) {
+		third2Loop(students, 4000, 6000);
+		return 0;
+	}
+
+	pid_t pid6 = fork();
+	if (pid6 == 0) {
+		third2Loop(students, 6000, 8000);
+		return 0;
+	}
 
 
-        return 0;
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	waitpid(pid3, NULL, 0);
+	waitpid(pid4, NULL, 0);
+	waitpid(pid5, NULL, 0);
+	waitpid(pid6, NULL, 0);
+
+
+	return 0;
 }

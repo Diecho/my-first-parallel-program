@@ -134,12 +134,6 @@ void secondLoop(vector<Student>& students){
 void third2Loop(vector<Student>& students, int limit, int newLimit){
 	int trio_count = 0;
 
-	m1.lock();
-
-	cout << "Range " << limit << " - " << newLimit << endl;
-	cout << "Searching for trios of dropouts with identical GPAs (First " << limit << " students)...\n";
-
-	m1.unlock();
 
 	for (int i = limit; i < newLimit; ++i) {
 		for (int j = i + 1; j < newLimit; ++j) {
@@ -159,6 +153,10 @@ void third2Loop(vector<Student>& students, int limit, int newLimit){
 	//cout << "loop_time " << (duration<double>(total_time)).count() << endl;
 
 	m1.lock();
+
+	cout << "Range " << limit << " - " << newLimit << endl;
+	cout << "Searching for trios of dropouts with identical GPAs (First " << limit << " students)...\n";
+
 	cout << "Total Identical Dropout Trios found: " << trio_count << "\n";
 	m1.unlock();
 }
