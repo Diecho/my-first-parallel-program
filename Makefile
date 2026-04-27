@@ -7,3 +7,5 @@ omp:
 	$(CXX) $(CXXFLAGS) -fopenmp src/omp.cc src/cvs_reader.cc -o omp
 thr:
 	$(CXX) $(CXXFLAGS) src/thread.cc src/cvs_reader.cc -o thr 
+frk:
+	$(CXX) $(CXXFLAGS) src/fork.cc src/cvs_reader.cc -o frk
