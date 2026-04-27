@@ -1,10 +1,12 @@
 #include <cstdio>
 #include <iostream>
 #include "cvs_reader.h"
+#include <mutex>
 #include <thread>
 
 using namespace std;
 
+mutex m1;
 
 void firstLoop(vector<Student>& students){
 	int n_of_drop = 0;
@@ -47,6 +49,9 @@ void firstLoop(vector<Student>& students){
 	}	
 	//auto end = sc::now();
 	//total_time += (end - start);
+	
+	m1.lock();
+
 	cout << "--- Data ---\n";
 
 	cout << "Total Number of student: " << total_students << "\n";
@@ -91,6 +96,8 @@ void firstLoop(vector<Student>& students){
 	cout << "------------------------------------------\n";
 
 	cout << "Finding high-risk pairs (Similar profiles, different outcomes)...\n";
+
+	m1.unlock();
 }
 void secondLoop(vector<Student>& students){
 	double similarity_threshold = 0.15;
@@ -115,15 +122,24 @@ void secondLoop(vector<Student>& students){
 	
 	//end = sc::now();
 	//total_time += (end - start);
+
+	m1.lock();
+
 	cout << "Total High-Risk Similar Pairs found: " << high_risk_pairs << "\n";
 
 	cout << "------------------------------------------\n";
+
+	m1.unlock();
 }
 void third2Loop(vector<Student>& students, int limit, int newLimit){
 	int trio_count = 0;
 
+	m1.lock();
+
 	cout << "Range " << limit << " - " << newLimit << endl;
 	cout << "Searching for trios of dropouts with identical GPAs (First " << limit << " students)...\n";
+
+	m1.unlock();
 
 	for (int i = limit; i < newLimit; ++i) {
 		for (int j = i + 1; j < newLimit; ++j) {
@@ -142,7 +158,9 @@ void third2Loop(vector<Student>& students, int limit, int newLimit){
 	//total_time += (end - start);
 	//cout << "loop_time " << (duration<double>(total_time)).count() << endl;
 
+	m1.lock();
 	cout << "Total Identical Dropout Trios found: " << trio_count << "\n";
+	m1.unlock();
 }
 int main(int argc, char* argv[]) {
 	string filename = "";
